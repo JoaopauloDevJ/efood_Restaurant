@@ -3,12 +3,7 @@ import bannerImg from '../../assets/image/bannerPrato.png'
 
 const Banner = () => {
   return (
-    <Image
-      style={{
-        backgroundImage: `url(${bannerImg})`,
-        filter: 'brightness(50%)'
-      }}
-    >
+    <Image style={{ backgroundImage: `url(${bannerImg})` }}>
       <div className="container">
         <TagBanner>Italiana</TagBanner>
         <TitleBanner>La Dolce Vita Trattoria</TitleBanner>
