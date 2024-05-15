@@ -3,13 +3,19 @@ import { colors } from '../../stylos'
 import { Link } from 'react-router-dom'
 
 export const Card = styled.div`
-  width: 472px;
+  max-width: 472px;
   heigth: 398px;
   border: 1px solid ${colors.red};
 
   position: relative;
   margin-bottom: 48px;
 `
+export const Capa = styled.img`
+  width: 100%;
+  height: 216px;
+  object-fit: cover;
+`
+
 export const Container = styled.div`
   padding: 8px;
 
@@ -34,6 +40,7 @@ export const Nota = styled.div`
 export const Descricao = styled.p`
   font-size: 14px;
   margin-bottom: 16px;
+  color: ${colors.red};
 `
 export const TagImg = styled.div`
   position: absolute;
