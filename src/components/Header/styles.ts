@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { colors } from '../../stylos'
 
-export const Image = styled.image`
+export const Image = styled.div`
   width: 100%;
   height: 384px;
   display: block;

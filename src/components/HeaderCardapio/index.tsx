@@ -3,7 +3,7 @@ import logo from '../../assets/image/logo.png'
 import { TitleRed } from '../../stylos'
 import { Image, ContainerHeader, VerRestaurantes } from './styles'
 
-const HeaderPerfil = () => {
+const HeaderCardapio = () => {
   return (
     <header>
       <Image style={{ backgroundImage: `url(${bannerPerfil})` }}>
@@ -19,4 +19,4 @@ const HeaderPerfil = () => {
   )
 }
 
-export default HeaderPerfil
+export default HeaderCardapio

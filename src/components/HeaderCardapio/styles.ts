@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { colors } from '../../stylos'
 
-export const Image = styled.image`
+export const Image = styled.div`
   width: 100%;
   height: 186px;
   display: block;

@@ -20,16 +20,17 @@ const ListaRestaurante = ({ restaurantes }: Props) => {
     <div className="container">
       <ContainerGrid>
         {restaurantes.map((restaurantes) => (
-          <Card
-            key={restaurantes.id}
-            title={restaurantes.titulo}
-            avaliation={restaurantes.avaliacao}
-            description={restaurantes.descricao}
-            cover={restaurantes.capa}
-            type={getRestauranteTag(restaurantes)}
-            id={restaurantes.id}
-            highlighted={restaurantes.destacado}
-          />
+          <li key={restaurantes.id}>
+            <Card
+              title={restaurantes.titulo}
+              avaliation={restaurantes.avaliacao}
+              description={restaurantes.descricao}
+              cover={restaurantes.capa}
+              type={getRestauranteTag(restaurantes)}
+              id={restaurantes.id}
+              highlighted={restaurantes.destacado}
+            />
+          </li>
         ))}
       </ContainerGrid>
     </div>

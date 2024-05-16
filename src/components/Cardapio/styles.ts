@@ -43,7 +43,6 @@ export const Modal = styled.div`
   left: 0;
   align-items: center;
   justify-content: center;
-  z-index: 1;
 
   &.visivel {
     display: flex;
@@ -66,6 +65,7 @@ export const ModalContent = styled.div`
   height: 344px;
   position: relative;
   padding: 32px;
+  z-index: 1;
 
   > img {
     width: 16px;

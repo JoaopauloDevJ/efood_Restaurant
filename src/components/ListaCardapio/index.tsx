@@ -7,12 +7,9 @@ export type Props = {
 }
 
 export const CardapioList = ({ restaurantes }: Props) => {
-  if (!restaurantes) {
-    return <h2>Carregando...</h2>
-  }
   return (
     <div className="container">
-      <S.CardPerfilGrid>
+      <S.ContainerCard>
         {restaurantes.map((restaurantes) => (
           <li key={restaurantes.cardapio.id}>
             <Cardapio
@@ -25,7 +22,7 @@ export const CardapioList = ({ restaurantes }: Props) => {
             />
           </li>
         ))}
-      </S.CardPerfilGrid>
+      </S.ContainerCard>
     </div>
   )
 }
