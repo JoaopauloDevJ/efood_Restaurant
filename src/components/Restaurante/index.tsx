@@ -19,7 +19,8 @@ const Card = ({
   type,
   avaliation,
   cover,
-  highlighted
+  highlighted,
+  id
 }: Props) => {
   const getDescription = (description: string) => {
     if (description.length > 250) {
@@ -52,7 +53,9 @@ const Card = ({
             </S.Nota>
           </div>
           <S.Descricao>{getDescription(description)}</S.Descricao>
-          <S.BotaoSaibaMais to="/restaurantes">Saiba Mais</S.BotaoSaibaMais>
+          <S.BotaoSaibaMais to={`/restaurante/${id}`}>
+            Saiba Mais
+          </S.BotaoSaibaMais>
         </S.Container>
       </S.Card>
     </div>

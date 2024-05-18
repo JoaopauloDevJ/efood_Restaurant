@@ -2,6 +2,7 @@ import HeaderCardapio from '../../components/HeaderCardapio'
 import CardapioList from '../../components/ListaCardapio'
 import Banner from '../../components/Banner'
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { Restaurante } from '../Home'
 
 export type Props = {
@@ -9,19 +10,20 @@ export type Props = {
 }
 
 const PagRestaurante = () => {
+  const { id } = useParams()
   const [cardapio, setCardapio] = useState<Restaurante[]>([])
 
   useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
+    fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
       .then((res) => res.json())
       .then((res) => setCardapio(res))
-  }, [])
+  }, [id])
 
   return (
     <>
       <HeaderCardapio />
       <Banner />
-      <CardapioList restaurantes={cardapio} />
+      <CardapioList restaurante={cardapio} />
     </>
   )
 }

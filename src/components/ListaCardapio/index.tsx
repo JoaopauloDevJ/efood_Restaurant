@@ -1,24 +1,25 @@
 import * as S from './styles'
-import { Restaurante } from '../../page/Home'
 import Cardapio from '../Cardapio'
+import { Restaurante } from '../../page/Home'
 
 export type Props = {
-  restaurantes: Restaurante[]
+  restaurante: Restaurante[]
 }
 
-export const CardapioList = ({ restaurantes }: Props) => {
+export const CardapioList = ({ restaurante }: Props) => {
+  console.log(restaurante)
   return (
     <div className="container">
       <S.ContainerCard>
-        {restaurantes.map((restaurantes) => (
-          <li key={restaurantes.cardapio.id}>
+        {restaurante.cardapio.map((cardapio) => (
+          <li key={cardapio.id}>
             <Cardapio
-              nome={restaurantes.cardapio.nome}
-              descricao={restaurantes.cardapio.descricao}
-              foto={restaurantes.cardapio.foto}
-              porcao={restaurantes.cardapio.porcao}
-              preco={restaurantes.cardapio.preco}
-              id={restaurantes.cardapio.id}
+              nome={cardapio.nome}
+              descricao={cardapio.descricao}
+              foto={cardapio.foto}
+              porcao={cardapio.porcao}
+              preco={cardapio.preco}
+              id={cardapio.id}
             />
           </li>
         ))}

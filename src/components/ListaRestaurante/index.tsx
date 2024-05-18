@@ -27,8 +27,8 @@ const ListaRestaurante = ({ restaurantes }: Props) => {
               description={restaurantes.descricao}
               cover={restaurantes.capa}
               type={getRestauranteTag(restaurantes)}
-              id={restaurantes.id}
               highlighted={restaurantes.destacado}
+              id={restaurantes.id}
             />
           </li>
         ))}
