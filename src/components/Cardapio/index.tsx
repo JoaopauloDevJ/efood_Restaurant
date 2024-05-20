@@ -1,6 +1,7 @@
 import * as S from './styles'
 import fechar from '../../assets/image/close.png'
 import { useState } from 'react'
+import { getDescription } from '../Restaurante'
 
 export type Props = {
   foto: string
@@ -29,9 +30,11 @@ const Cardapio = ({ foto, preco, nome, descricao, porcao }: Props) => {
     <>
       <div className="container">
         <S.CardPerfil>
-          <S.ImageCard>{foto}</S.ImageCard>
+          <S.ImageCard>
+            <img src={foto} alt={`Imagem do prato, ${nome}`} />
+          </S.ImageCard>
           <S.Title>{nome}</S.Title>
-          <S.Descricao>{descricao}</S.Descricao>
+          <S.Descricao>{getDescription(descricao)}</S.Descricao>
           <S.BotaoCard
             onClick={() => {
               setModal({
@@ -42,17 +45,18 @@ const Cardapio = ({ foto, preco, nome, descricao, porcao }: Props) => {
             Adicionar ao carrinho
           </S.BotaoCard>
         </S.CardPerfil>
-
         <S.Modal className={modal.isVsisble ? 'visivel' : ''}>
           <S.ModalContent>
             <img src={fechar} onClick={() => closeModal()} />
             <div>
-              <img src={foto} />
+              <S.ImageModal src={foto} alt={`Imagem do prato, ${nome}`} />
             </div>
             <S.DescriptionModal>
               <h3>{nome}</h3>
-              <S.Descricao>{descricao}</S.Descricao>
-              <S.Descricao>{porcao}</S.Descricao>
+              <S.Descricao>
+                {descricao}
+                <span>{porcao}</span>
+              </S.Descricao>
               <S.BotaoModal>{`Adicionar ao carrinho ${preco}`}</S.BotaoModal>
             </S.DescriptionModal>
           </S.ModalContent>

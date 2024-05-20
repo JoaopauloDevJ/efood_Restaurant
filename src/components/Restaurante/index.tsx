@@ -13,6 +13,13 @@ export type Props = {
   id: number
 }
 
+export const getDescription = (description: string) => {
+  if (description.length > 250) {
+    return description.slice(0, 247) + '...'
+  }
+  return description
+}
+
 const Card = ({
   title,
   description,
@@ -22,12 +29,6 @@ const Card = ({
   highlighted,
   id
 }: Props) => {
-  const getDescription = (description: string) => {
-    if (description.length > 250) {
-      return description.slice(0, 247) + '...'
-    }
-    return description
-  }
   return (
     <div className="container">
       <S.Card>
@@ -53,7 +54,7 @@ const Card = ({
             </S.Nota>
           </div>
           <S.Descricao>{getDescription(description)}</S.Descricao>
-          <S.BotaoSaibaMais to={`/restaurante/${id}`}>
+          <S.BotaoSaibaMais to={`/restaurantes/${id}`}>
             Saiba Mais
           </S.BotaoSaibaMais>
         </S.Container>
