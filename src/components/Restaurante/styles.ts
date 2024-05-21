@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 export const Card = styled.div`
   max-width: 472px;
   heigth: 398px;
+  color: ${colors.red};
   border: 1px solid ${colors.red};
 
   position: relative;
@@ -40,7 +41,6 @@ export const Nota = styled.div`
 export const Descricao = styled.p`
   font-size: 14px;
   margin-bottom: 16px;
-  color: ${colors.red};
 `
 export const TagImg = styled.div`
   position: absolute;
