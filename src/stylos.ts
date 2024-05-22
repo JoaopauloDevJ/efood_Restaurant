@@ -5,7 +5,8 @@ export const colors = {
   beige: '#FFEBD9',
   lightBeige: '#FFF8F2',
   darkBackground: '#000000CC',
-  white: 'rgba(255, 255, 255, 1)'
+  white: 'rgba(255, 255, 255, 1)',
+  black: '#000'
 }
 
 export const EstiloGlobal = createGlobalStyle`

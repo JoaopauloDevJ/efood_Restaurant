@@ -19,6 +19,7 @@ export const CardapioList = ({ cardapio }: Props) => {
               porcao={prato.porcao}
               preco={prato.preco}
               id={prato.id}
+              prato={prato}
             />
           </li>
         ))}

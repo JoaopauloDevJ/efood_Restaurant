@@ -5,9 +5,7 @@ import { Link } from 'react-router-dom'
 export const Card = styled.div`
   max-width: 472px;
   heigth: 398px;
-
   border: 1px solid ${colors.red};
-
   position: relative;
   margin-bottom: 48px;
 `

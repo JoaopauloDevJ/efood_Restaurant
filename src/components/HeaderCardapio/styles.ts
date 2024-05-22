@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { colors } from '../../stylos'
+import { TitleRed, colors } from '../../stylos'
 
 export const Image = styled.div`
   width: 100%;
@@ -15,6 +15,10 @@ export const ContainerHeader = styled.div`
   align-items: center;
   padding-top: 63px;
   justify-content: space-between;
+
+  ${TitleRed} {
+    cursor: pointer;
+  }
 `
 
 export const VerRestaurantes = styled(Link)`

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { colors } from '../../stylos'
 
-export const CardPerfil = styled.div`
+export const CardCardapio = styled.div`
   width: 320px;
   padding: 8px;
   background-color: ${colors.red};

@@ -2,6 +2,9 @@ import * as S from './styles'
 import fechar from '../../assets/image/close.png'
 import { useState } from 'react'
 import { getDescription } from '../Restaurante'
+import { useDispatch } from 'react-redux'
+import { add, open } from '../../store/reducers/Cart'
+import { Prato } from '../../page/Home'
 
 export type Props = {
   foto: string
@@ -10,13 +13,30 @@ export type Props = {
   nome: string
   descricao: string
   porcao: string
+  prato: Prato
 }
 
-type ModalState = {
+export type ModalState = {
   isVsisble: boolean
 }
 
-const Cardapio = ({ foto, preco, nome, descricao, porcao }: Props) => {
+export const formataPreco = (preco = 0) => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(preco)
+}
+
+const Cardapio = ({ foto, preco, nome, descricao, porcao, prato }: Props) => {
+  const dispatch = useDispatch()
+  const addCart = () => {
+    if (prato) {
+      dispatch(add(prato))
+      dispatch(open())
+    }
+    return prato
+  }
+
   const [modal, setModal] = useState<ModalState>({
     isVsisble: false
   })
@@ -29,7 +49,7 @@ const Cardapio = ({ foto, preco, nome, descricao, porcao }: Props) => {
   return (
     <>
       <div className="container">
-        <S.CardPerfil>
+        <S.CardCardapio>
           <S.ImageCard>
             <img src={foto} alt={`Imagem do prato, ${nome}`} />
           </S.ImageCard>
@@ -42,9 +62,9 @@ const Cardapio = ({ foto, preco, nome, descricao, porcao }: Props) => {
               })
             }}
           >
-            Adicionar ao carrinho
+            Mais detalhes
           </S.BotaoCard>
-        </S.CardPerfil>
+        </S.CardCardapio>
         <S.Modal className={modal.isVsisble ? 'visivel' : ''}>
           <S.ModalContent>
             <img src={fechar} onClick={() => closeModal()} />
@@ -57,7 +77,9 @@ const Cardapio = ({ foto, preco, nome, descricao, porcao }: Props) => {
                 {descricao}
                 <span>{porcao}</span>
               </S.Descricao>
-              <S.BotaoModal>{`Adicionar ao carrinho ${preco}`}</S.BotaoModal>
+              <S.BotaoModal
+                onClick={addCart}
+              >{`Adicionar ao carrinho ${formataPreco(preco)}`}</S.BotaoModal>
             </S.DescriptionModal>
           </S.ModalContent>
           <div className="overlay" onClick={() => closeModal()}></div>
