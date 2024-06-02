@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { colors } from '../../stylos'
 import excluir from '../../assets/image/excluir.png'
+import { SidebarComponents } from '../Sidebar/styles'
 
 export const CartContainer = styled.div`
   position: fixed;
@@ -24,15 +25,18 @@ export const Overlay = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${colors.black};
-  opacity: 0.7;
+  opacity: 0.55;
+`
+export const Sidebar = styled(SidebarComponents)`
+  &.is-visible {
+    display: block;
+  }
 `
 
-export const Sidebar = styled.aside`
-  max-width: 360px;
-  width: 100%;
-  padding: 32px 8px 0 8px;
-  background-color: ${colors.red};
-  z-index: 1;
+export const TitleSidebar = styled.h2`
+  font-size: 16px;
+  color: ${colors.beige};
+  margin-bottom: 16px;
 `
 
 export const CartItem = styled.li`
@@ -82,7 +86,7 @@ export const ResumoPedido = styled.p`
   color: ${colors.beige};
 `
 
-export const ButtonComprar = styled.button`
+export const ButtonSidebar = styled.button`
   max-width: 100%;
   width: 100%;
   cursor: pointer;
@@ -93,4 +97,12 @@ export const ButtonComprar = styled.button`
   background-color: ${colors.beige};
   color: ${colors.red};
   border: none;
+`
+
+export const BackCart = styled.div`
+  display: flex;
+
+  &.is-visible {
+    display: none;
+  }
 `

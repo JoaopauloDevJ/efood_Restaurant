@@ -1,11 +1,14 @@
 import * as S from './styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
-import { close, remover } from '../../store/reducers/Cart'
+import { close, remover, closeCartSidebar } from '../../store/reducers/Cart'
 import { formataPreco } from '../Cardapio'
+import Checkout from '../Checkout'
 
 const Cart = () => {
-  const { items, isOpen } = useSelector((state: RootReducer) => state.adicionar)
+  const { items, isOpen, openSidebar } = useSelector(
+    (state: RootReducer) => state.adicionar
+  )
   const dispatch = useDispatch()
 
   const closeCart = () => {
@@ -14,6 +17,10 @@ const Cart = () => {
 
   const removeCart = (id: number) => {
     dispatch(remover(id))
+  }
+
+  const irParaEntrega = () => {
+    dispatch(closeCartSidebar())
   }
 
   const getPriceTotal = () => {
@@ -25,24 +32,31 @@ const Cart = () => {
   return (
     <S.CartContainer className={isOpen ? 'is-open' : ''}>
       <S.Overlay onClick={closeCart} />
-      <S.Sidebar>
-        <ul>
-          {items.map((item) => (
-            <S.CartItem key={item.id}>
-              <img src={item.foto} alt={`Imagem do prato, ${item.nome}`} />
-              <div>
-                <h3>{item.nome}</h3>
-                <p>{formataPreco(item.preco)}</p>
-              </div>
-              <button type="button" onClick={() => removeCart(item.id)} />
-            </S.CartItem>
-          ))}
-        </ul>
-        <S.ResumoPedido>
-          Valor total: <span>{formataPreco(getPriceTotal())}</span>
-        </S.ResumoPedido>
-        <S.ButtonComprar type="button">Continuar com a entrega</S.ButtonComprar>
-      </S.Sidebar>
+      {items.length > 0 ? (
+        <S.Sidebar className={openSidebar ? 'is-visible' : ''}>
+          <ul>
+            {items.map((item) => (
+              <S.CartItem key={item.id}>
+                <img src={item.foto} alt={`Imagem do prato, ${item.nome}`} />
+                <div>
+                  <h3>{item.nome}</h3>
+                  <p>{formataPreco(item.preco)}</p>
+                </div>
+                <button type="button" onClick={() => removeCart(item.id)} />
+              </S.CartItem>
+            ))}
+          </ul>
+          <S.ResumoPedido>
+            Valor total: <span>{formataPreco(getPriceTotal())}</span>
+          </S.ResumoPedido>
+          <S.ButtonSidebar type="button" onClick={irParaEntrega}>
+            Continuar com a entrega
+          </S.ButtonSidebar>
+        </S.Sidebar>
+      ) : (
+        <p>O carrinho está vazio</p>
+      )}
+      <Checkout />
     </S.CartContainer>
   )
 }

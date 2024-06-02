@@ -9,9 +9,11 @@ import { RootReducer } from '../../store'
 const HeaderCardapio = () => {
   const { items } = useSelector((state: RootReducer) => state.adicionar)
   const dispatch = useDispatch()
+
   const openCart = () => {
     dispatch(open())
   }
+
   return (
     <header>
       <Image style={{ backgroundImage: `url(${bannerPerfil})` }}>

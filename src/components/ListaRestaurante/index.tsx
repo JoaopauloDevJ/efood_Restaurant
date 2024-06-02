@@ -1,9 +1,8 @@
-import { Restaurante } from '../../page/Home'
 import Card from '../Restaurante'
 import { ContainerGrid } from './styles'
 
 export type Props = {
-  restaurantes: Restaurante[]
+  restaurantes?: Restaurante[]
 }
 
 const ListaRestaurante = ({ restaurantes }: Props) => {
@@ -19,19 +18,20 @@ const ListaRestaurante = ({ restaurantes }: Props) => {
   return (
     <div className="container">
       <ContainerGrid>
-        {restaurantes.map((restaurantes) => (
-          <li key={restaurantes.id}>
-            <Card
-              title={restaurantes.titulo}
-              avaliation={restaurantes.avaliacao}
-              description={restaurantes.descricao}
-              cover={restaurantes.capa}
-              type={getRestauranteTag(restaurantes)}
-              highlighted={restaurantes.destacado}
-              id={restaurantes.id}
-            />
-          </li>
-        ))}
+        {restaurantes &&
+          restaurantes.map((restaurantes) => (
+            <li key={restaurantes.id}>
+              <Card
+                title={restaurantes.titulo}
+                avaliation={restaurantes.avaliacao}
+                description={restaurantes.descricao}
+                cover={restaurantes.capa}
+                type={getRestauranteTag(restaurantes)}
+                highlighted={restaurantes.destacado}
+                id={restaurantes.id}
+              />
+            </li>
+          ))}
       </ContainerGrid>
     </div>
   )

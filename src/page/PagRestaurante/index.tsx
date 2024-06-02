@@ -3,7 +3,6 @@ import CardapioList from '../../components/ListaCardapio'
 import Banner from '../../components/Banner'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Prato } from '../Home'
 
 const PagRestaurante = () => {
   const { id } = useParams()

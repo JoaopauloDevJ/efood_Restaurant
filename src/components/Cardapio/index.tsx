@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { getDescription } from '../Restaurante'
 import { useDispatch } from 'react-redux'
 import { add, open } from '../../store/reducers/Cart'
-import { Prato } from '../../page/Home'
 
 export type Props = {
   foto: string
