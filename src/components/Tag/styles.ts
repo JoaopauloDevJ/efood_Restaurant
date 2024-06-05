@@ -1,5 +1,7 @@
 import styled from 'styled-components'
+
 import { Props } from './index'
+
 import { colors } from '../../stylos'
 
 export const TagContainer = styled.div<Props>`

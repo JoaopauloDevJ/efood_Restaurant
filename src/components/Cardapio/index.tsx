@@ -1,9 +1,13 @@
-import * as S from './styles'
-import fechar from '../../assets/image/close.png'
 import { useState } from 'react'
-import { getDescription } from '../Restaurante'
 import { useDispatch } from 'react-redux'
+
+import { getDescription } from '../Restaurante'
+import { formataPreco } from '../../utils/index'
 import { add, open } from '../../store/reducers/Cart'
+
+import * as S from './styles'
+
+import fechar from '../../assets/image/close.png'
 
 export type Props = {
   foto: string
@@ -17,13 +21,6 @@ export type Props = {
 
 export type ModalState = {
   isVsisble: boolean
-}
-
-export const formataPreco = (preco = 0) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(preco)
 }
 
 const Cardapio = ({ foto, preco, nome, descricao, porcao, prato }: Props) => {
@@ -45,6 +42,7 @@ const Cardapio = ({ foto, preco, nome, descricao, porcao, prato }: Props) => {
       isVsisble: false
     })
   }
+
   return (
     <>
       <div className="container">

@@ -1,9 +1,11 @@
-import * as S from './styles'
 import { useDispatch, useSelector } from 'react-redux'
+
+import Checkout from '../Checkout'
 import { RootReducer } from '../../store'
 import { close, remover, closeCartSidebar } from '../../store/reducers/Cart'
-import { formataPreco } from '../Cardapio'
-import Checkout from '../Checkout'
+import { formataPreco, getPriceTotal } from '../../utils/index'
+
+import * as S from './styles'
 
 const Cart = () => {
   const { items, isOpen, openSidebar } = useSelector(
@@ -11,23 +13,19 @@ const Cart = () => {
   )
   const dispatch = useDispatch()
 
-  const closeCart = () => {
-    dispatch(close())
+  const irParaEntrega = () => {
+    dispatch(closeCartSidebar())
   }
 
   const removeCart = (id: number) => {
     dispatch(remover(id))
   }
 
-  const irParaEntrega = () => {
-    dispatch(closeCartSidebar())
+  const closeCart = () => {
+    openSidebar ? dispatch(close()) : ''
   }
 
-  const getPriceTotal = () => {
-    return items.reduce((precoProduto, somaPrecos) => {
-      return (precoProduto += somaPrecos.preco)
-    }, 0)
-  }
+  const totalPrices = getPriceTotal(items)
 
   return (
     <S.CartContainer className={isOpen ? 'is-open' : ''}>
@@ -47,14 +45,17 @@ const Cart = () => {
             ))}
           </ul>
           <S.ResumoPedido>
-            Valor total: <span>{formataPreco(getPriceTotal())}</span>
+            Valor total: <span>{formataPreco(totalPrices)}</span>
           </S.ResumoPedido>
           <S.ButtonSidebar type="button" onClick={irParaEntrega}>
             Continuar com a entrega
           </S.ButtonSidebar>
         </S.Sidebar>
       ) : (
-        <p>O carrinho está vazio</p>
+        <S.CartClear>
+          <p>O carrinho está vazio</p>
+          <p>adicione um produto para comprar!</p>
+        </S.CartClear>
       )}
       <Checkout />
     </S.CartContainer>

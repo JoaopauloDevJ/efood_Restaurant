@@ -42,7 +42,7 @@ const api = createApi({
     getRestaurantes: builder.query<Restaurante[], void>({
       query: () => 'restaurantes'
     }),
-    getMenu: builder.query<Restaurante[], void>({
+    getMenu: builder.query<Restaurante, string>({
       query: (id) => `restaurantes/${id}`
     }),
     purchase: builder.mutation<PurchaseResponse, PurchasePayload>({

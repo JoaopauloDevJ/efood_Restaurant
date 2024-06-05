@@ -1,5 +1,6 @@
-import * as S from './styles'
 import Cardapio from '../Cardapio'
+
+import * as S from './styles'
 
 export type Props = {
   cardapio: Prato[]

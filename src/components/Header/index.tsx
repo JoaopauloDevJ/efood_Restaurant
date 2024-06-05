@@ -1,7 +1,8 @@
-import * as S from './styles'
 import BannerImg from '../../assets/image/banner.png'
 import LogoImg from '../../assets/image/logo.png'
+
 import { Centralizar } from '../../stylos'
+import * as S from './styles'
 
 const Header = () => {
   return (

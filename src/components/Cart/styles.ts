@@ -1,7 +1,9 @@
 import styled from 'styled-components'
+
 import { colors } from '../../stylos'
-import excluir from '../../assets/image/excluir.png'
 import { SidebarComponents } from '../Sidebar/styles'
+
+import excluir from '../../assets/image/excluir.png'
 
 export const CartContainer = styled.div`
   position: fixed;
@@ -104,5 +106,19 @@ export const BackCart = styled.div`
 
   &.is-visible {
     display: none;
+  }
+`
+
+export const CartClear = styled.div`
+  background-color: ${colors.red};
+  z-index: 1;
+  width: 360px;
+  padding-top: 24px;
+
+  p {
+    color: ${colors.beige};
+    font-size: 18px;
+    text-align: center;
+    line-height: 26px;
   }
 `

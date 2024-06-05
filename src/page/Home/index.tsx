@@ -1,22 +1,26 @@
 import ListaRestaurante from '../../components/ListaRestaurante'
 import Header from '../../components/Header'
-import { useEffect, useState } from 'react'
+
+import { useGetRestaurantesQuery } from '../../services/api'
+import Loader from '../../components/Loaders'
 
 const Home = () => {
-  const [restaurantes, setRestaurantes] = useState<Restaurante[]>([])
+  const { data: restaurantes, isLoading: isLoadingRestaurantes } =
+    useGetRestaurantesQuery()
 
-  useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-      .then((res) => res.json())
-      .then((res) => setRestaurantes(res))
-  }, [])
+  if (restaurantes) {
+    return (
+      <>
+        <Header />
+        <ListaRestaurante
+          restaurantes={restaurantes}
+          isLoading={isLoadingRestaurantes}
+        />
+      </>
+    )
+  }
 
-  return (
-    <>
-      <Header />
-      <ListaRestaurante restaurantes={restaurantes} />
-    </>
-  )
+  return <Loader />
 }
 
 export default Home

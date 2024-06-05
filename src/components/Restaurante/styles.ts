@@ -1,6 +1,7 @@
 import styled from 'styled-components'
-import { colors } from '../../stylos'
 import { Link } from 'react-router-dom'
+
+import { colors } from '../../stylos'
 
 export const Card = styled.div`
   max-width: 472px;

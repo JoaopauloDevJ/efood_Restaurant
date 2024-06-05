@@ -1,8 +1,10 @@
 import Card from '../Restaurante'
+
 import { ContainerGrid } from './styles'
 
 export type Props = {
   restaurantes?: Restaurante[]
+  isLoading: boolean
 }
 
 const ListaRestaurante = ({ restaurantes }: Props) => {
@@ -15,6 +17,7 @@ const ListaRestaurante = ({ restaurantes }: Props) => {
 
     return tags
   }
+
   return (
     <div className="container">
       <ContainerGrid>

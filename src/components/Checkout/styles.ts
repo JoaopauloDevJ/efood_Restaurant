@@ -53,18 +53,27 @@ export const LabelGroup = styled.label`
 export const InputGroup = styled.input`
   width: 100%;
   height: 32px;
+  padding: 0 8px;
   background-color: ${colors.beige};
   border: none;
   margin-top: 8px;
   margin-bottom: 8px;
 
-  &.cardNumber {
-    width: 224px;
+  .numberCart {
+    display: flex;
+    justify-content: space-between;
   }
 
-  &.codCard {
-    width: 86px;
+  &.error {
+    border: 3px solid red;
   }
+`
+
+export const NumberCard = styled.div`
+  width: 224px;
+`
+export const CardCode = styled.div`
+  width: 86px;
 `
 
 export const ContainerPagamento = styled(Sidebar)`
@@ -81,6 +90,10 @@ export const ContainerPagamento = styled(Sidebar)`
   .expiresCard {
     display: flex;
     justify-content: space-between;
+
+    div {
+      width: 152px;
+    }
   }
 
   &.is-visible {
@@ -89,6 +102,10 @@ export const ContainerPagamento = styled(Sidebar)`
 `
 
 export const ContainerConfirmação = styled(Sidebar)`
+  div {
+    margin-bottom: 24px;
+  }
+
   &.is-visible {
     display: block;
   }

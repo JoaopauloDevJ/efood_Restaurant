@@ -1,11 +1,12 @@
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
-import { ButtonSidebar } from '../../components/Cart/styles'
-
-import * as S from './styles'
+import { formataPreco, getPriceTotal } from '../../utils/index'
 import Button from '../Button/index'
 import { usePurchaseMutation } from '../../services/api'
+import { RootReducer } from '../../store'
 import {
   close,
   clear,
@@ -14,9 +15,8 @@ import {
   finish,
   openPurchaseFunction
 } from '../../store/reducers/Cart'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootReducer } from '../../store'
-import { useEffect } from 'react'
+
+import * as S from './styles'
 
 const Checkout = () => {
   const { openDelivery, openPurchase, openFinalizar, items } = useSelector(
@@ -24,6 +24,8 @@ const Checkout = () => {
   )
   const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
   const dispatch = useDispatch()
+
+  const totalPrices = getPriceTotal(items)
 
   const buttonCLick = () => {
     dispatch(openPurchaseFunction())
@@ -41,6 +43,8 @@ const Checkout = () => {
     dispatch(close())
     dispatch(clear())
   }
+
+  const orderId = data?.orderId ?? 'N/A'
 
   const form = useFormik({
     initialValues: {
@@ -100,6 +104,14 @@ const Checkout = () => {
     }
   })
 
+  const chekInputHasError = (fieldName: string) => {
+    const isTouched = fieldName in form.touched
+    const isInvalid = fieldName in form.errors
+    const hasError = isTouched && isInvalid
+
+    return hasError
+  }
+
   useEffect(() => {
     if (isSuccess) {
       dispatch(finish())
@@ -119,6 +131,7 @@ const Checkout = () => {
                 Quem irá receber
               </S.LabelGroup>
               <S.InputGroup
+                className={chekInputHasError('destinatario') ? 'error' : ''}
                 type="text"
                 id="destinatario"
                 name="destinatario"
@@ -128,6 +141,7 @@ const Checkout = () => {
               />
               <S.LabelGroup htmlFor="endereco">Endereço</S.LabelGroup>
               <S.InputGroup
+                className={chekInputHasError('endereco') ? 'error' : ''}
                 type="text"
                 id="endereco"
                 name="endereco"
@@ -137,6 +151,7 @@ const Checkout = () => {
               />
               <S.LabelGroup htmlFor="cidade">Cidade</S.LabelGroup>
               <S.InputGroup
+                className={chekInputHasError('cidade') ? 'error' : ''}
                 type="text"
                 id="cidade"
                 name="cidade"
@@ -148,6 +163,7 @@ const Checkout = () => {
                 <div>
                   <S.LabelGroup htmlFor="cep">CEP</S.LabelGroup>
                   <S.InputGroup
+                    className={chekInputHasError('cep') ? 'error' : ''}
                     type="text"
                     id="cep"
                     name="cep"
@@ -159,6 +175,7 @@ const Checkout = () => {
                 <div>
                   <S.LabelGroup htmlFor="numero">Número</S.LabelGroup>
                   <S.InputGroup
+                    className={chekInputHasError('numero') ? 'error' : ''}
                     type="text"
                     id="numero"
                     name="numero"
@@ -199,13 +216,14 @@ const Checkout = () => {
       </>
       <>
         <S.ContainerPagamento
-          title="Pagamento - Valor a pagar R$ 190,90"
+          title={`Pagamento - Valor a pagar ${formataPreco(totalPrices)}`}
           className={openPurchase ? 'is-visible' : ''}
         >
           <div>
             <S.Forms onSubmit={form.handleSubmit}>
               <S.LabelGroup htmlFor="nameCard">Nome no cartão</S.LabelGroup>
               <S.InputGroup
+                className={chekInputHasError('nameCard') ? 'error' : ''}
                 type="text"
                 id="nameCard"
                 name="nameCard"
@@ -214,12 +232,12 @@ const Checkout = () => {
                 onBlur={form.handleBlur}
               />
               <div className="numberCart">
-                <div>
+                <S.NumberCard>
                   <S.LabelGroup htmlFor="numberCard">
                     Número do cartão
                   </S.LabelGroup>
                   <S.InputGroup
-                    className="cardNumber"
+                    className={chekInputHasError('numberCard') ? 'error' : ''}
                     type="text"
                     id="numberCard"
                     name="numberCard"
@@ -227,11 +245,11 @@ const Checkout = () => {
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                   />
-                </div>
-                <div>
+                </S.NumberCard>
+                <S.CardCode>
                   <S.LabelGroup htmlFor="cardCode">CVV</S.LabelGroup>
                   <S.InputGroup
-                    className="codCard"
+                    className={chekInputHasError('cardCode') ? 'error' : ''}
                     type="text"
                     id="cardCode"
                     name="cardCode"
@@ -239,7 +257,7 @@ const Checkout = () => {
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                   />
-                </div>
+                </S.CardCode>
               </div>
               <div className="expiresCard">
                 <div>
@@ -247,6 +265,7 @@ const Checkout = () => {
                     Mês de vencimento
                   </S.LabelGroup>
                   <S.InputGroup
+                    className={chekInputHasError('expiresMonth') ? 'error' : ''}
                     type="text"
                     id="expiresMonth"
                     name="expiresMonth"
@@ -260,6 +279,7 @@ const Checkout = () => {
                     Ano de vencimento
                   </S.LabelGroup>
                   <S.InputGroup
+                    className={chekInputHasError('expiresYear') ? 'error' : ''}
                     type="text"
                     id="expiresYear"
                     name="expiresYear"
@@ -290,7 +310,7 @@ const Checkout = () => {
       </>
       <>
         <S.ContainerConfirmação
-          title="Pedido finalizado"
+          title={`Pedido finalizado - ${orderId}`}
           className={openFinalizar ? 'is-visible' : ''}
         >
           <>

@@ -1,6 +1,7 @@
-import * as S from './styles'
 import Tag from '../Tag'
 import estrela from '../../assets/image/estrela.png'
+
+import * as S from './styles'
 import { TitleRed } from '../../stylos'
 
 export type Props = {

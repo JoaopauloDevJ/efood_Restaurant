@@ -1,24 +1,28 @@
+import { useParams } from 'react-router-dom'
+
 import HeaderCardapio from '../../components/HeaderCardapio'
 import CardapioList from '../../components/ListaCardapio'
 import Banner from '../../components/Banner'
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+
+import { useGetMenuQuery } from '../../services/api'
+import Loader from '../../components/Loaders'
+
+type RestauranteParams = {
+  id: string
+}
 
 const PagRestaurante = () => {
-  const { id } = useParams()
-  const [cardapio, setCardapio] = useState<Prato[]>([])
+  const { id } = useParams() as RestauranteParams
+  const { data: restaurante } = useGetMenuQuery(id)
 
-  useEffect(() => {
-    fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
-      .then((res) => res.json())
-      .then((res) => setCardapio(res.cardapio))
-  }, [id])
-
+  if (!restaurante) {
+    return <Loader />
+  }
   return (
     <>
       <HeaderCardapio />
-      <Banner />
-      <CardapioList cardapio={cardapio} />
+      <Banner restaurante={restaurante} />
+      <CardapioList cardapio={restaurante.cardapio} />
     </>
   )
 }

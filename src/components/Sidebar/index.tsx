@@ -1,4 +1,3 @@
-import React from 'react'
 import { SidebarComponents } from './styles'
 
 type Props = {

@@ -1,10 +1,13 @@
-import bannerPerfil from '../../assets/image/banner.png'
-import logo from '../../assets/image/logo.png'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { open } from '../../store/reducers/Cart'
+import { RootReducer } from '../../store'
+
 import { TitleRed } from '../../stylos'
 import { Image, ContainerHeader, VerRestaurantes } from './styles'
-import { open } from '../../store/reducers/Cart'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootReducer } from '../../store'
+
+import bannerPerfil from '../../assets/image/banner.png'
+import logo from '../../assets/image/logo.png'
 
 const HeaderCardapio = () => {
   const { items } = useSelector((state: RootReducer) => state.adicionar)
