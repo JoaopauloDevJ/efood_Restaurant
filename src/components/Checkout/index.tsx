@@ -20,16 +20,12 @@ import * as S from './styles'
 
 const Checkout = () => {
   const { openDelivery, openPurchase, openFinalizar, items } = useSelector(
-    (state: RootReducer) => state.adicionar
+    (state: RootReducer) => state.cart
   )
   const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
   const dispatch = useDispatch()
 
   const totalPrices = getPriceTotal(items)
-
-  const buttonCLick = () => {
-    dispatch(openPurchaseFunction())
-  }
 
   const backPageCart = () => {
     dispatch(closeDeliverySidebar())
@@ -41,7 +37,6 @@ const Checkout = () => {
 
   const FinishButtonClick = () => {
     dispatch(close())
-    dispatch(clear())
   }
 
   const orderId = data?.orderId ?? 'N/A'
@@ -112,11 +107,21 @@ const Checkout = () => {
     return hasError
   }
 
+  const buttonCLick = () => {
+    dispatch(openPurchaseFunction())
+  }
+
   useEffect(() => {
     if (isSuccess) {
       dispatch(finish())
     }
   }, [dispatch, isSuccess])
+
+  useEffect(() => {
+    if (isSuccess && openFinalizar) {
+      dispatch(clear())
+    }
+  }, [openFinalizar, isSuccess, dispatch])
 
   return (
     <>
@@ -200,6 +205,7 @@ const Checkout = () => {
             <Button
               type="button"
               onClick={buttonCLick}
+              disabled={!form.isValid}
               title="Clique aqui para adicionar forma de pagamento"
             >
               Continuar com o pagamento

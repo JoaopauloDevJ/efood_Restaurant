@@ -9,7 +9,7 @@ import * as S from './styles'
 
 const Cart = () => {
   const { items, isOpen, openSidebar } = useSelector(
-    (state: RootReducer) => state.adicionar
+    (state: RootReducer) => state.cart
   )
   const dispatch = useDispatch()
 

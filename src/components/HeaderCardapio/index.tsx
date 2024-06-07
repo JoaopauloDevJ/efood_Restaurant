@@ -10,7 +10,7 @@ import bannerPerfil from '../../assets/image/banner.png'
 import logo from '../../assets/image/logo.png'
 
 const HeaderCardapio = () => {
-  const { items } = useSelector((state: RootReducer) => state.adicionar)
+  const { items } = useSelector((state: RootReducer) => state.cart)
   const dispatch = useDispatch()
 
   const openCart = () => {
