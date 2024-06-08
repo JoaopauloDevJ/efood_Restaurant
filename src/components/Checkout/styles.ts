@@ -50,14 +50,16 @@ export const LabelGroup = styled.label`
   color: ${colors.beige};
 `
 
-export const InputGroup = styled.input`
-  width: 100%;
-  height: 32px;
-  padding: 0 8px;
-  background-color: ${colors.beige};
-  border: none;
-  margin-top: 8px;
-  margin-bottom: 8px;
+export const InputGroup = styled.div`
+  input {
+    width: 100%;
+    height: 32px;
+    padding: 0 8px;
+    background-color: ${colors.beige};
+    border: none;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
 
   .numberCart {
     display: flex;
